@@ -5579,11 +5579,21 @@ renderReport() {
       }
 
       // 3. Global Events
+// --- [NEW] แก้ไข: ดักจับปุ่มแสดงรหัสผ่านหน้า Login โดยตรง (เพื่อความชัวร์) ---
+      const showLoginPassCheckbox = document.getElementById("show-password-login");
+      if (showLoginPassCheckbox) {
+        showLoginPassCheckbox.addEventListener("change", (e) => {
+          const passwordInput = document.getElementById("password");
+          if (passwordInput) {
+            passwordInput.type = e.target.checked ? "text" : "password";
+          }
+        });
+      }
+      // ---------------------------------------------------------------------
+
       document.body.addEventListener("change", (e) => {
-        if (e.target.id === "show-password-login")
-          document.getElementById("password").type = e.target.checked
-            ? "text"
-            : "password";
+        // [DELETED] ลบส่วนเช็ค show-password-login เดิมออกแล้ว เพื่อไม่ให้ทำงานซ้อนกัน
+
         if (e.target.id === "show-password-user-form") {
           document.getElementById("user-password").type = e.target.checked
             ? "text"
